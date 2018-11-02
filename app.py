@@ -26,7 +26,7 @@ class Main(object):
     
   def run(self):
     self.save_following()
-    self.save_following()
+    self.save_followers()
     self.diff_follows()
 
 if __name__ == '__main__':
