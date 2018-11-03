@@ -1,6 +1,6 @@
 import fire
 
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
   from config_dev import *

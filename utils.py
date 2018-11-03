@@ -14,28 +14,31 @@ def getTotalFollowers(api, user_id):
     return followers
 
 
+def getTotalFollowings(api, user_id):
+    following = []
+    next_max_id = True
+    while next_max_id:
+        if next_max_id is True:
+            next_max_id = ''
+        _ = api.getUserFollowings(user_id, maxid=next_max_id)
+        following.extend(api.LastJson.get('users', []))
+        next_max_id = api.LastJson.get('next_max_id', '')
+    return following
+
+
 def followersToJSON(username, password, json_file='followers.json'):
     api = InstagramAPI(username, password)
     api.login()
-    user_id = api.username_id
-    followers = getTotalFollowers(api, user_id)
+    followers = getTotalFollowers(api, api.username_id)
     with open(json_file, 'w') as outfile:
         json.dump(followers, outfile)
     print('Number of followers:', len(followers))
 
 
 def followingToJSON(username, password, json_file='following.json'):
-    API = InstagramAPI(username, password)
-    API.login()
-    user_id = API.username_id
-    following = []
-    next_max_id = True
-    while next_max_id:
-        if next_max_id is True:
-            next_max_id = ''
-        _ = API.getUserFollowings(user_id, maxid=next_max_id)
-        following.extend(API.LastJson.get('users', []))
-        next_max_id = API.LastJson.get('next_max_id', '')
+    api = InstagramAPI(username, password)
+    api.login()
+    following = getTotalFollowings(api, api.username_id)
     with open(json_file, 'w') as outfile:
         json.dump(following, outfile)
     print('Number of following:', len(following))
