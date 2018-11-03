@@ -30,6 +30,7 @@ def followersToJSON(username, password, json_file='followers.json'):
     api = InstagramAPI(username, password)
     api.login()
     followers = getTotalFollowers(api, api.username_id)
+
     with open(json_file, 'w') as outfile:
         json.dump(followers, outfile)
     print('Number of followers:', len(followers))
@@ -39,6 +40,7 @@ def followingToJSON(username, password, json_file='following.json'):
     api = InstagramAPI(username, password)
     api.login()
     following = getTotalFollowings(api, api.username_id)
+
     with open(json_file, 'w') as outfile:
         json.dump(following, outfile)
     print('Number of following:', len(following))
@@ -63,6 +65,7 @@ def createCSVfromJSON(json_file, csv_file):
 def diffFollowsToCSV(following_json='following.json', followers_json='followers.json', out_diff_csv='diff-follow.csv'):
     with open(following_json) as f:
         following = json.load(f)
+        
     with open(followers_json) as f:
         followers = json.load(f)
     
