@@ -62,13 +62,17 @@ def createCSVfromJSON(json_file, csv_file):
             f.write(line)
 
 
-def diffFollowsToCSV(following_json='following.json', followers_json='followers.json', out_diff_csv='diff-follow.csv'):
+def diffFollowsToCSV(
+                    following_json='following.json',
+                    followers_json='followers.json',
+                    out_diff_csv='diff-follow.csv'):
+
     with open(following_json) as f:
         following = json.load(f)
-        
+
     with open(followers_json) as f:
         followers = json.load(f)
-    
+
     followers_list = []
     for i in followers:
         line = '{};{}\n'.format(i['full_name'], i['username'])

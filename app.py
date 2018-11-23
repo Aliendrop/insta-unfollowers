@@ -7,7 +7,7 @@ if DEBUG:
 else:
     from config import *
 
-from utils import *
+from utils import followersToJSON, followingToJSON, diffFollowsToCSV  # noqa: E402
 
 
 class Main(object):
@@ -28,6 +28,7 @@ class Main(object):
         self.save_following()
         self.save_followers()
         self.diff_follows()
+
 
 if __name__ == '__main__':
     fire.Fire(Main)
